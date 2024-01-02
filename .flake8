@@ -1,0 +1,3 @@
+[flake8]
+max-line-length = 250
+exclude = smart_cab_allocation_system/settings/*, **/migrations/*, manage.py, env, venv
