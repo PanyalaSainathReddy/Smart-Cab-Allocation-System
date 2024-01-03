@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 from decouple import config
 
@@ -17,6 +18,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
+    'cabs',
 ]
 
 MIDDLEWARE = [
@@ -26,6 +32,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'smart_cab_allocation_system.urls'
@@ -99,3 +106,26 @@ CORS_ORIGIN_WHITELIST = (
 ADMIN_SITE_HEADER = "Smart Cab Allocation Administration"
 ADMIN_SITE_TITLE = "Smart Cab Allocation Site Admin"
 ADMIN_INDEX_TITLE = "Control Panel"
+
+AUTH_USER_MODEL = "registration.User"
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'registration.authenticate.CustomAuthentication',
+    ],
+}
+
+# Simple JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
+    'ROTATE_REFRESH_TOKENS': False,
+}
+
+# Google OAuth2 settings
+GOOGLE_OAUTH2_CLIENT_ID = config('DJANGO_GOOGLE_OAUTH2_CLIENT_ID', cast=str)
+GOOGLE_OAUTH2_CLIENT_SECRET = config('DJANGO_GOOGLE_OAUTH2_CLIENT_SECRET', cast=str)

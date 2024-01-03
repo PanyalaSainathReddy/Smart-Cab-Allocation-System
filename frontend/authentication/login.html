@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body onload="checkLoggedIn()">
+    <div class="container" id="container">
+      <div class="form-container sign-up-container">
+        <form action="#" id="sign_up_form">
+
+          <h1>Create Account</h1>
+          <input type="text" placeholder="First Name" id="first_name" required />
+          <input type="text" placeholder="Last Name" id="last_name" />
+          <input type="email" placeholder="Email" id="email_sign_up" required />
+          <input type="password" placeholder="Password" id="password_sign_up" required />
+          <input type="password" placeholder="Confirm Password" onkeyup="matchPassword()" id="confirm_password_sign_up" required />
+          <span id='message'></span>
+          <br />
+          <button type="submit">Sign Up</button>
+
+          <p style="margin: 15px 0px;">OR</p>
+          
+          <div type="button" class="google-btn" id="google_sign_up_button">
+            <div class="google-icon-wrapper">
+              <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png"/>
+            </div>
+            <p class="btn-text" style="margin: 10px 7px 0 0;"><b>Sign up with Google</b></p>
+          </div>
+
+        </form>
+      </div>
+      <div class="form-container sign-in-container">
+        <form action="#" id="sign_in_form">
+
+          <h1>Sign in</h1>
+          <input type="email" placeholder="Email" id="email_sign_in" required />
+          <input
+            type="password"
+            placeholder="Password"
+            id="password_sign_in"
+            required
+          />
+          <br />
+          <button type="submit">Sign in</button>
+
+          <p style="margin: 15px 0px;">OR</p>
+          
+          <div type="button" class="google-btn" id="google_sign_in_button">
+            <div class="google-icon-wrapper">
+              <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png"/>
+            </div>
+            <p class="btn-text" style="margin: 10px 10px 0 0;"><b>Sign in with Google</b></p>
+          </div>
+
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h2>Welcome Back!</h2>
+            <br />
+            <button class="ghost" id="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h2>Hello there.</h2>
+            <br />
+            <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="snackbar">Error!</div>
+
+    <script src="login.js"></script>
+  </body>
+</html>

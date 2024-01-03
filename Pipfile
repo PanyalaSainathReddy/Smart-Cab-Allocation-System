@@ -7,6 +7,10 @@ name = "pypi"
 django = "*"
 python-decouple = "*"
 flake8-django = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+requests = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

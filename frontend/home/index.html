@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Home</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <nav id="nav">
+        <button id="logoutButton">logout</button>
+    </nav>
+
+    <div id="floating-panel">
+        <b>Start: </b>
+        <input type="text" id="startLocation" placeholder="Enter start location">
+        <b>End: </b>
+        <input type="text" id="endLocation" placeholder="Enter end location">
+        <button id="submitBtn">Book Cab</button>
+      </div>
+      <div id="map"></div>
+      <div id="responseMsg"></div>
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDejcaC0mWkEDpXgwJSmkMf-_CVqbDxPdg&callback=initMap&v=weekly&libraries=places"
+        defer
+      ></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
