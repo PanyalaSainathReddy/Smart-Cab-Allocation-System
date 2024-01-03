@@ -84,12 +84,12 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, startLo
       })
       .then((response) => {
         directionsRenderer.setDirections(response);
-        start_lat = startLocation.getPlace().geometry.location.lat();
-        start_lng = startLocation.getPlace().geometry.location.lng();
-        miAPI.post(BASE_URL + 'api/cabs/find-nearest-cab/', {
-            'start_lat': start_lat.toString(),
-            'start_lng': start_lng.toString(),
-          }, {
+        const coordinates = {
+          start_lat: startLocation.getPlace().geometry.location.lat(),
+          start_lng: startLocation.getPlace().geometry.location.lng(),
+        };
+        const body = JSON.stringify(coordinates);
+        miAPI.post(BASE_URL + 'api/cabs/find-nearest-cab/', body, {
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
             },
@@ -97,6 +97,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, startLo
         )
         .then(function (response) {
           console.log(response);
+          document.getElementById("responseMsg").innerHTML = `Nearest cab is ${response.data.nearest_cab} and it is at a distance of ${response.data.distance_to_nearest_cab}m from your start location.`;
         })
         .catch(function (error) {
           // handle error

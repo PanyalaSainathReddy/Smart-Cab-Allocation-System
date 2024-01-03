@@ -1,13 +1,13 @@
-import requests
+import requests, json
 from django.http import JsonResponse
 from .models import Cab
+from decouple import config
 
 def find_nearest_cab(request):
     if request.method == 'POST':
-        print(request.POST.get('start_lat'))
-        start_lat = request.POST.get('start_lat')
-        start_lng = request.POST.get('start_lng')
-        print(start_lat, start_lng)
+        data = json.loads(request.body)
+        start_lat = data.get('start_lat')
+        start_lng = data.get('start_lng')
 
         all_cabs = Cab.objects.all()
 
@@ -18,17 +18,14 @@ def find_nearest_cab(request):
             params = {
                 'origins': f'{start_lat},{start_lng}',
                 'destinations': f'{cab.cab_latitude},{cab.cab_longitude}',
-                'key': 'AIzaSyDejcaC0mWkEDpXgwJSmkMf-_CVqbDxPdg'
+                'key': config('GOOGLE_MAPS_API_KEY', cast=str)
             }
 
             response = requests.get(distance_matrix_api_base_url, params=params)
             data = response.json()
-            print(data)
 
             if data['status'] == 'OK':
-                print(data['rows'][0]['elements'][0])
                 distance = data['rows'][0]['elements'][0]['distance']['value']
-                print(distance)
                 cab_distances.append({'cab_id': cab.id, 'distance': distance})
 
         cab_distances.sort(key=lambda x: x['distance'])
